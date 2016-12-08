@@ -177,10 +177,21 @@
           <span class="caret"></span></button>
           <ul class="dropdown-menu">
             <li><a id="sort_button_context" onclick="document.getElementById('query').value=document.getElementById('query').value.replace(' /date','');document.searchform.submit();">Context Ranking</a></li>
-            <li><a id="sort_button_date" onclick="document.getElementById('query').value=document.getElementById('query').value + ' /date';document.searchform.submit();">Sort by Date</a></li>
+            <li><a id="sort_button_date" onclick="document.getElementById('query').value=document.getElementById('query').value + ' /date';filterByDate();">Sort by Date</a></li>
           </ul>
         </div>
       </div>
+      <script>
+
+        var btnDate = document.getElementById("sort_button_date");
+        function filterByDate(){
+          function sortDescending(a, b) {
+              var dateA = new Date($(a).find(".urlinfo").text()), dateB = new Date($(b).find(".urlinfo").text());
+              return dateA < dateB;
+          };
+          $("#searchresults .searchresults").sort(sortDescending).appendTo("#searchresults");
+        }
+      </script>
       <!--The toolbar of navigation ends-->
 
       <!-- type the number of results and navigation bar -->
