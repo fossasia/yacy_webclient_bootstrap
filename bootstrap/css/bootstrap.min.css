@@ -7,6 +7,7 @@
  .input-group-btn
  {position: absolute;
 	font-size: 0;
+	width:20%;
 white-space: nowrap;
 left: 200px;
 top: 70px;}
