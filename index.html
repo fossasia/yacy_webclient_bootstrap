@@ -89,7 +89,7 @@ open about:config and set security.fileuri.strict_origin_policy to ‘false.’
   <style type="text/css">.twitter-typeahead {margin: 0px;padding: 0px;top:2px;}</style> <!-- fix for input window -->
 </head>
   <body id="index" onload="document.getElementById('search').focus()">
-       <div class="navbar navbar-default navbar-fixed-top" role="navigation" id="navtop">      
+      <div class="navbar navbar-default navbar-fixed-top" role="navigation" id="navtop">      
       <div id="navtop1">
        <a id="homepage" class="navbar-brand" href="http://susper.com">
         <img id="logo" class="yacylogo" src="images/susper.svg" alt="YaCy">
@@ -98,7 +98,7 @@ open about:config and set security.fileuri.strict_origin_policy to ‘false.’
       <div class="ns">
       </div>
    	  </div>
-      <div class="navbar navbar-default navbar-fixed-bottom" role="navigation" id="moveup">
+<div class="navbar navbar-default navbar-fixed-bottom" role="navigation" id="moveup">
         <div id="bottom1">
     <div id="set-susper-default"> 
       <h3>Set Susper as your default search engine on Mozilla!</h3> 
@@ -125,51 +125,13 @@ open about:config and set security.fileuri.strict_origin_policy to ‘false.’
         $("#install-susper").on("click", function(){ 
           window.external.AddSearchProvider("http://susper.com/susper.xml"); 
         }); 
-          $("#cancel-installation").on("click", function(){ 
+          $("#cancel-installation").on("click", function(){ sda
             $("#set-susper-default").remove(); 
           }); 
       }); 
     </script>
 
-      <!-- top navigation -->
-      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-
-            <span id="topmenu"></span>
-
-            <a id="navbar-homepage" class="navbar-brand" href="http://susper.com" style="position:absolute;top:-6px;display:inline;white-space:nowrap;">
-              <img id="logo" class="yacylogo" src="images/susper.svg" alt="YaCy" style="height:auto; width:auto; max-width:200px; max-height:32px;vertical-align:middle">
-            </a>
-            <span id="topmenu" style="position:absolute;top:12px;left:80px;display:inline;white-space:nowrap;font-size:2em;"></span>
-
-          </div>
-          <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-              <li id="header_help" class="dropdown">
-                <a href="#" data-toggle="dropdown" class="dropdown-toggle" data-proofer-ignore><span class="glyphicon glyphicon-question-sign"></span></a>
-                <ul class="dropdown-menu">
-                  <li id="header_profile"><a href="yacysearch/about.html">About This Page</a></li>
-                  <li id="header_tutorial"><a href="http://yacy.net/tutorials/">YaCy Tutorials</a></li>
-                  <li class="divider"></li>
-                  <li id="header_download"><a href="http://yacy.net" target="_blank"><i>external</i>&nbsp;&nbsp;&nbsp;Download YaCy</a></li>
-                  <li id="header_community"><a href="http://forum.yacy.de" target="_blank"><i>external</i>&nbsp;&nbsp;&nbsp;Community (Web Forums)</a></li>
-                  <li id="header_wiki"><a href="http://wiki.yacy.de" target="_blank"><i>external</i>&nbsp;&nbsp;&nbsp;Project Wiki</a></li>
-                  <li id="header_git"><a href="https://github.com/yacy/yacy_search_server/commits/master" target="_blank"><i>external</i>&nbsp;&nbsp;&nbsp;Git Repository</a></li>
-                  <li id="header_bugs"><a href="http://bugs.yacy.net" target="_blank"><i>external</i>&nbsp;&nbsp;&nbsp;Bugtracker</a></li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
+      <!-- top navigation --></div></div>
 <div class="container-fluid">
   <div class="starter-template">
 
@@ -179,14 +141,10 @@ open about:config and set security.fileuri.strict_origin_policy to ‘false.’
     <form class="search form-inline" action="yacysearch/index.html" id="searchform" method="get"  accept-charset="UTF-8">
       <fieldset class="maininput">
         <div class="input-group">
-          <a href="javascript:{}" id="newbtn" ><img src="images/search.png" alt="Search" id="newbtnimg"></a>
           <input name="query" id="search" type="text" size="40" maxlength="80" value="" autofocus="autofocus" onFocus="this.select()" class="form-control searchinput typeahead" />
           <div class="input-group-btn">
 
             <button id="Enter" name="Enter" class="btn btn-primary" type="submit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Search&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
-
-            <button id="Enter" name="Enter" class="btn btn-primary" type="submit">Search</button>
-
           </div>
         </div>
         <input type="hidden" name="verify" value="false" />
@@ -207,10 +165,9 @@ open about:config and set security.fileuri.strict_origin_policy to ‘false.’
 <!-- modify content according to query url attributes -->
 <script>
 $('#newbtn').on('click',function(){document.getElementById('searchform').submit();});
-
-$('.maininput').css({'background-color':'#F8F8F8'});
 $('.search').on('keypress',function()
 {
+  $('.maininput').css({'background-color':'#F8F8F8'});
 	$('.moveupform').addClass('navbar navbar-default navbar-fixed-top ns');
 	$('.moveupform').removeClass('moveupform');
 	$('.ns').css({
