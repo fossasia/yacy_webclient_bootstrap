@@ -100,6 +100,40 @@ open about:config and set security.fileuri.strict_origin_policy to ‘false.’
    	  </div>
       <div class="navbar navbar-default navbar-fixed-bottom" role="navigation" id="moveup">
         <div id="bottom1">
+    <div id="set-susper-default"> 
+      <h3>Set Susper as your default search engine on Mozilla!</h3> 
+      <ol> 
+        <li><button id="install-susper">Install susper</button></li> 
+        <li>Mark the checkbox to set Susper as your default search engine</li> 
+        <li>Start searching!</li> 
+      </ol> 
+      <button id="cancel-installation">Cancel</button> 
+    </div> 
+    <script> 
+      $(document).ready(function(){ 
+        var isFirefox = typeof InstallTrigger !== 'undefined';
+        if(isFirefox === false){
+          $("#set-susper-default").remove(); 
+        }
+        $("#set-susper-default").hide(); 
+        if(window.external && window.external.IsSearchProviderInstalled){ 
+          var isInstalled = window.external.IsSearchProviderInstalled("http://susper.com"); 
+          if(!isInstalled){ 
+            $("#set-susper-default").show(); 
+          }
+        } 
+        $("#install-susper").on("click", function(){ 
+          window.external.AddSearchProvider("http://susper.com/susper.xml"); 
+        }); 
+          $("#cancel-installation").on("click", function(){ 
+            $("#set-susper-default").remove(); 
+          }); 
+      }); 
+    </script>
+
+      <!-- top navigation -->
+      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
               <span class="sr-only">Toggle navigation</span>
@@ -107,12 +141,19 @@ open about:config and set security.fileuri.strict_origin_policy to ‘false.’
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
+
             <span id="topmenu"></span>
+
+            <a id="navbar-homepage" class="navbar-brand" href="http://susper.com" style="position:absolute;top:-6px;display:inline;white-space:nowrap;">
+              <img id="logo" class="yacylogo" src="images/susper.svg" alt="YaCy" style="height:auto; width:auto; max-width:200px; max-height:32px;vertical-align:middle">
+            </a>
+            <span id="topmenu" style="position:absolute;top:12px;left:80px;display:inline;white-space:nowrap;font-size:2em;"></span>
+
           </div>
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
               <li id="header_help" class="dropdown">
-                <a href="#" data-toggle="dropdown" class="dropdown-toggle"><span class="glyphicon glyphicon-question-sign"></span></a>
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle" data-proofer-ignore><span class="glyphicon glyphicon-question-sign"></span></a>
                 <ul class="dropdown-menu">
                   <li id="header_profile"><a href="yacysearch/about.html">About This Page</a></li>
                   <li id="header_tutorial"><a href="http://yacy.net/tutorials/">YaCy Tutorials</a></li>
@@ -128,6 +169,7 @@ open about:config and set security.fileuri.strict_origin_policy to ‘false.’
           </div>
         </div>
       </div>
+
 <div class="container-fluid">
   <div class="starter-template">
 
@@ -140,7 +182,11 @@ open about:config and set security.fileuri.strict_origin_policy to ‘false.’
           <a href="javascript:{}" id="newbtn" ><img src="images/search.png" id="newbtnimg"></a>
           <input name="query" id="search" type="text" size="40" maxlength="80" value="" autofocus="autofocus" onFocus="this.select()" class="form-control searchinput typeahead" />
           <div class="input-group-btn">
+
             <button id="Enter" name="Enter" class="btn btn-primary" type="submit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Search&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+
+            <button id="Enter" name="Enter" class="btn btn-primary" type="submit">Search</button>
+
           </div>
         </div>
         <input type="hidden" name="verify" value="false" />

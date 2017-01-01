@@ -15,7 +15,7 @@
   No other browser is that strict and there is no work around. To see the glyphicons in firefox,
   open about:config and set security.fileuri.strict_origin_policy to ‘false.’
   -->
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="shortcut icon" type="image/x-icon" href="/susper.ico" />
   <meta name="Content-Language" content="English, Englisch" />
   <meta name="keywords" content="YaCy HTTP search engine spider indexer java network open free download Mac Windows Linux Software development" />
   <meta name="description" content="Software HTTP Freeware Home Page" />
@@ -127,7 +127,7 @@
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
         <li id="header_help" class="dropdown">
-          <a href="#" data-toggle="dropdown" class="dropdown-toggle"><span class="glyphicon glyphicon-question-sign"></span></a>
+          <a href="#" data-toggle="dropdown" class="dropdown-toggle" data-proofer-ignore><span class="glyphicon glyphicon-question-sign"></span></a>
           <ul class="dropdown-menu">
             <li id="header_search"><a href="index.html?">Search Page</a></li>
             <li id="header_profile"><a href="about.html?">About This Page</a></li>
@@ -169,6 +169,49 @@
         <input id="timezoneOffset" type="hidden" name="timezoneOffset" value="">
         <script>document.getElementById("timezoneOffset").value = new Date().getTimezoneOffset();</script>
       </form>
+      
+      <!--The toolbar of navigation begins-->
+      <div id="searchnavigation" class="btn-group" role="group">
+        <div class="btn-group">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Search Tools <span class="caret"></span>
+            </button>
+          <ul class="dropdown-menu">
+            <li class="active"><a id="sort_button_context" onclick="document.getElementById('query').value=document.getElementById('query').value.replace(' /date','');;activeBtn('#sort_button_context', '#sort_button_date');document.searchform.submit();">Context Ranking</a></li>
+            <li><a id="sort_button_date" onclick="filterByDate();activeBtn('#sort_button_date', '#sort_button_context');">Sort by Date</a></li>
+          </ul>
+        </div>
+      </div>
+      <script>
+
+        var btnDate = document.getElementById("sort_button_date");
+        
+    
+        function activeBtn(activate, deactivate){
+          $(activate).parent().addClass("active");
+          $(deactivate).parent().removeClass("active");
+        }
+
+        function filterByDate(){
+          var queryVal = document.getElementById('query');
+          if(queryVal.value.includes(' /date')){
+          queryVal.value = queryVal.value.replace(' /date','');
+          queryVal.value = queryVal.value + ' /date';
+         }else{
+          queryVal.value = queryVal.value + ' /date';
+         } 
+          
+          function sortDescending(a, b) {
+              var dateA = new Date($(a).find(".urlinfo").text()), dateB = new Date($(b).find(".urlinfo").text());
+              return dateA < dateB;
+          };
+          $("#searchresults .searchresults").sort(sortDescending).appendTo("#searchresults");
+        }
+
+       
+        
+      </script>
+      <!--The toolbar of navigation ends-->
 
       <!-- type the number of results and navigation bar -->
       <div id="results"></div>
@@ -196,15 +239,10 @@
 
     <div class="col-sm-4 col-md-3 sidebar" id="sidebar">
       <!-- navigation begin -->
-      <p class="navbutton"></p>
-      <div class="btn-group btn-group-justified">
-        <div class="btn-group btn-group-xs"><button type="button" id="sort_button_context" class="btn btn-default" onclick="document.getElementById('query').value=document.getElementById('query').value.replace(' /date','');document.searchform.submit();">Context Ranking</button></div>
-        <div class="btn-group btn-group-xs"><button type="button" id="sort_button_date" class="btn btn-default" onclick="document.getElementById('query').value=document.getElementById('query').value + ' /date';document.searchform.submit();">Sort by Date</button></div>
-      </div>
 
-      <div id="searchnavigation"></div>
+      <div id="filters-searchs"></div>
       <div id="downloadbutton"></div>
-
+     
       <!-- navigation end -->
 
     </div> <!-- close sidebar -->
@@ -310,12 +348,13 @@
           resulthtml.innerHTML = rowCollection.resultTable();
           hideDownloadScript();
         }
-        var searchnavigation = document.getElementById("searchnavigation");
+        var filtersSearchs = document.getElementById("filters-searchs");
+        var  searchNavigation = document.getElementById("searchnavigation");
         searchnavigation.innerHTML += searchResult.renderNavigation("Result Layout");
-        if (topicsfacet) searchnavigation.innerHTML += topicsfacet.tagCloud(searchResult.attributes.servlet, topicsModel.attributes.key, topicsModel.attributes.value, 8, searchResult);
-        if (filetypefacet) searchnavigation.innerHTML += filetypefacet.facetBox(searchResult.attributes.servlet, filetypeModel.attributes.key, filetypeModel.attributes.value, 8, searchResult);
-        if (sitefacet) searchnavigation.innerHTML += sitefacet.facetBox(searchResult.attributes.servlet, siteModel.attributes.key, siteModel.attributes.value, 16, searchResult);
-        if (authorfacet) searchnavigation.innerHTML += authorfacet.facetBox(searchResult.attributes.servlet, authorModel.attributes.key, authorModel.attributes.value, 16, searchResult);
+        if (topicsfacet) filtersSearchs.innerHTML += topicsfacet.tagCloud(searchResult.attributes.servlet, topicsModel.attributes.key, topicsModel.attributes.value, 8, searchResult);
+        if (filetypefacet) filtersSearchs.innerHTML += filetypefacet.facetBox(searchResult.attributes.servlet, filetypeModel.attributes.key, filetypeModel.attributes.value, 8, searchResult);
+        if (sitefacet) filtersSearchs.innerHTML += sitefacet.facetBox(searchResult.attributes.servlet, siteModel.attributes.key, siteModel.attributes.value, 16, searchResult);
+        if (authorfacet) filtersSearchs.innerHTML += authorfacet.facetBox(searchResult.attributes.servlet, authorModel.attributes.key, authorModel.attributes.value, 16, searchResult);
         // generic facets
         var genericfacets = navigation.genericfacets();
         for (var i = 0; i < genericfacets.length; i++) {
@@ -335,14 +374,7 @@
         document.getElementById("progressbar_text").innerHTML = "The search service is not available right now. Please try again.";
       }
     });
-    // set buttons
-    if (document.getElementById('query').value.indexOf(" /date") == -1) {
-      document.getElementById("sort_button_context").setAttribute("class","btn btn-default active");
-      document.getElementById("sort_button_context").setAttribute("onclick","");
-    } else {
-      document.getElementById("sort_button_date").setAttribute("class","btn btn-default active");
-      document.getElementById("sort_button_date").setAttribute("onclick","");
-    }
+
   }
 </script>
 
