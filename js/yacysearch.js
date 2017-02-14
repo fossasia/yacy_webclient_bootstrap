@@ -11,7 +11,7 @@ var SearchModel = Backbone.Model.extend({
   defaults:{hl:'false',query:'',start:'0',rows:'100',layout:'paragraph',startTime:new Date(),servlet:"index.html",contentdom:"text"},
 
   url:function(){
-    u = searchURL + '&hl=false&wt=yjson&facet=true&facet.mincount=1&facet.field=host_s&facet.field=url_file_ext_s&facet.field=url_protocol_s&facet.field=author_sxt&facet.field=collection_sxt&start=' + this.attributes.start + '&rows=' + this.attributes.rows + '&query=' + this.attributes.query;
+    var u = searchURL + '&hl=false&wt=yjson&facet=true&facet.mincount=1&facet.field=host_s&facet.field=url_file_ext_s&facet.field=url_protocol_s&facet.field=author_sxt&facet.field=collection_sxt&start=' + this.attributes.start + '&rows=' + this.attributes.rows + '&query=' + this.attributes.query;
     if (this.attributes.layout == "images") u += "&fq=url_file_ext_s:(png+OR+jpeg+OR+jpg+OR+gif)";
     return u;
   },
