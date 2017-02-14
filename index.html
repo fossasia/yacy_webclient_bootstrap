@@ -25,8 +25,8 @@ open about:config and set security.fileuri.strict_origin_policy to ‘false.’
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Bootstrap core CSS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
   <script src="bootstrap/js/jquery.min.js" type="text/javascript" ></script>
   <script src="bootstrap/js/bootstrap.min.js" type="text/javascript" ></script>
   <script src="bootstrap/js/docs.min.js" type="text/javascript" ></script>
@@ -54,13 +54,14 @@ open about:config and set security.fileuri.strict_origin_policy to ‘false.’
   <!--[if lte IE 7.0]>
    <link rel="stylesheet" type="text/css" media="screen" href="css/ie7.css" >
   <![endif]-->
+  
   <script type="text/javascript" src="./bootstrap/js/typeahead.jquery.min.js"></script>
   <script type="text/javascript">
   //<!--
      var suggestMatcher = function() {
        return function opensearch(q, cb) {
-       	 $.getJSON(suggestUrl + "&q="+ q, function(data) {
-           	var parsed = [];
+         $.getJSON(suggestUrl + "&q="+ q, function(data) {
+            var parsed = [];
             for (var i = 0; i < data[0][1].length; i++) {
                 var row = data[0][1][i];
                 if (row) {
@@ -77,9 +78,9 @@ open about:config and set security.fileuri.strict_origin_policy to ‘false.’
       };
     $(document).ready(function() {
       $('#search').typeahead({hint:false,highlight:true,minLength:1}, {
-    	name: 'states',
-    	displayKey: 'value',
-    	source: suggestMatcher()
+      name: 'states',
+      displayKey: 'value',
+      source: suggestMatcher()  
       });
     });
   //-->
@@ -88,7 +89,17 @@ open about:config and set security.fileuri.strict_origin_policy to ‘false.’
   <style type="text/css">.twitter-typeahead {margin: 0px;padding: 0px;top:2px;}</style> <!-- fix for input window -->
 </head>
   <body id="index" onload="document.getElementById('search').focus()">
-
+      <div class="navbar navbar-default navbar-fixed-top" role="navigation" id="navtop">      
+      <div id="navtop1">
+       <a id="homepage" class="navbar-brand" href="http://susper.com">
+        <img id="logo" class="yacylogo" src="images/susper.svg" alt="YaCy">
+      </a>
+      </div>
+      <div class="ns">
+      </div>
+   	  </div>
+<div class="navbar navbar-default navbar-fixed-bottom" role="navigation" id="moveup">
+        <div id="bottom1">
     <div id="set-susper-default"> 
       <h3>Set Susper as your default search engine on Mozilla!</h3> 
       <ol> 
@@ -114,61 +125,35 @@ open about:config and set security.fileuri.strict_origin_policy to ‘false.’
         $("#install-susper").on("click", function(){ 
           window.external.AddSearchProvider("http://susper.com/susper.xml"); 
         }); 
-          $("#cancel-installation").on("click", function(){ 
+          $("#cancel-installation").on("click", function(){ sda
             $("#set-susper-default").remove(); 
           }); 
       }); 
     </script>
 
-      <!-- top navigation -->
-      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a id="navbar-homepage" class="navbar-brand" href="http://susper.com" style="position:absolute;top:-6px;display:inline;white-space:nowrap;">
-              <img id="logo" class="yacylogo" src="images/susper.svg" alt="YaCy" style="height:auto; width:auto; max-width:200px; max-height:32px;vertical-align:middle">
-            </a>
-            <span id="topmenu" style="position:absolute;top:12px;left:80px;display:inline;white-space:nowrap;font-size:2em;"></span>
-          </div>
-          <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-              <li id="header_help" class="dropdown">
-                <a href="#" data-toggle="dropdown" class="dropdown-toggle" data-proofer-ignore><span class="glyphicon glyphicon-question-sign"></span></a>
-                <ul class="dropdown-menu">
-                  <li id="header_profile"><a href="yacysearch/about.html">About This Page</a></li>
-                  <li id="header_tutorial"><a href="http://yacy.net/tutorials/">YaCy Tutorials</a></li>
-                  <li class="divider"></li>
-                  <li id="header_download"><a href="http://yacy.net" target="_blank"><i>external</i>&nbsp;&nbsp;&nbsp;Download YaCy</a></li>
-                  <li id="header_community"><a href="http://forum.yacy.de" target="_blank"><i>external</i>&nbsp;&nbsp;&nbsp;Community (Web Forums)</a></li>
-                  <li id="header_wiki"><a href="http://wiki.yacy.de" target="_blank"><i>external</i>&nbsp;&nbsp;&nbsp;Project Wiki</a></li>
-                  <li id="header_git"><a href="https://github.com/yacy/yacy_search_server/commits/master" target="_blank"><i>external</i>&nbsp;&nbsp;&nbsp;Git Repository</a></li>
-                  <li id="header_bugs"><a href="http://bugs.yacy.net" target="_blank"><i>external</i>&nbsp;&nbsp;&nbsp;Bugtracker</a></li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
+      <!-- top navigation --></div></div>
 <div class="container-fluid">
   <div class="starter-template">
-
 	<h2 class="yacy"><a href="http://yacy.net" class="yacylogo" id="homepage"><img src="images/susper.svg" alt="YaCy" id="biglogo" style="margin: auto;"></a></h2>
     <h2 class="yacy" id="greeting"></h2>
-
-    <form class="search form-inline" action="yacysearch/index.html" method="get" id="searchform" accept-charset="UTF-8">
+    <div class="moveupform">
+    <form class="search form-inline" action="yacysearch/index.html" id="searchform" method="get"  accept-charset="UTF-8">
       <fieldset class="maininput">
         <div class="input-group">
           <input name="query" id="search" type="text" size="40" maxlength="80" value="" autofocus="autofocus" onFocus="this.select()" class="form-control searchinput typeahead" >
           <div class="input-group-btn">
-            <button id="Enter" name="Enter" class="btn btn-primary" type="submit">Search</button>
+
+            <button id="Enter" name="Enter" class="btn btn-primary" type="submit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Search&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
           </div>
         </div>
+        <input type="hidden" name="nav" value="filetype,protocol,hosts,authors,collections,namespace,topics,date" />
+        <input type="hidden" name="startRecord" id="startRecord" value="0" />
+        <input type="hidden" name="indexof" value="off" />
+        <input type="hidden" name="meanCount" value="5" />
+        <input type="hidden" name="resource" value="global" />
+        <input type="hidden" name="prefermaskfilter" value="" />
+        <input type="hidden" name="maximumRecords" value="10" />
+        <input id="timezoneOffset" type="hidden" name="timezoneOffset" value="" />
         <input type="hidden" name="verify" value="false" >
 
         <input type="hidden" name="nav" value="filetype,protocol,hosts,authors,collections,namespace,topics,date" >
@@ -181,11 +166,31 @@ open about:config and set security.fileuri.strict_origin_policy to ‘false.’
         <input type="hidden" name="maximumRecords" value="10" >
         <input id="timezoneOffset" type="hidden" name="timezoneOffset" value="" >
       </fieldset>
-	  <script >document.getElementById("timezoneOffset").value = new Date().getTimezoneOffset();</script>
+    <script >document.getElementById("timezoneOffset").value = new Date().getTimezoneOffset();</script>
     </form>
+    <div>
   </div>
 </div>
 <!-- modify content according to query url attributes -->
+<script>
+$('#newbtn').on('click',function(){document.getElementById('searchform').submit();});
+$('.search').on('keypress',function()
+{
+  $('.maininput').css({'background-color':'#F8F8F8'});
+	$('.moveupform').addClass('navbar navbar-default navbar-fixed-top ns');
+	$('.moveupform').removeClass('moveupform');
+	$('.ns').css({
+    	'width':'48%','left':'12%'
+  });
+	$('.navbar-fixed-top').css({'visibility':'visible','background-color':'#F8F8F8'});
+	$('.navbar navbar-default navbar-fixed-top').css({'height':'12%'});
+	$('#biglogo').css({'visibility':'hidden'});
+	$('#newbtn').css({'visibility':'visible'});
+	$('#Enter').css({'visibility':'hidden'});
+	$('.maininput').css({'position':'absolute','left':'5.7%','top':'-17%'});
+}
+);
+</script>
 <script type="text/javascript">
 document.getElementById("title").appendChild(document.createTextNode(headline));
 document.getElementById("topmenu").appendChild(document.createTextNode(headline));

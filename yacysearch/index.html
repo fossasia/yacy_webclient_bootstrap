@@ -110,7 +110,7 @@
 </head>
 <body id="yacysearch" onLoad="document.searchform.query.focus();">
 <!-- top navigation -->
-<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+<div class="navbar navbar-default navbar-fixed-top" role="navigation" style="height:100px">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -119,10 +119,10 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a id="homepage" class="navbar-brand" href="http://susper.com" style="position:absolute;top:-6px;display:inline;white-space:nowrap;">
-        <img id="logo" class="yacylogo" src="../images/susper.svg" alt="YaCy" style="height:auto; width:auto; max-width:200px; max-height:32px;vertical-align:middle">
+      <a id="homepage" class="navbar-brand" href="http://susper.com">
+        <img id="logo" class="yacylogo" src="../images/susper.svg" alt="YaCy">
       </a>
-      <span id="topmenu" style="position:absolute;top:12px;left:80px;display:inline;white-space:nowrap;font-size:2em;"></span>
+      <span id="topmenu" ></span>
     </div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
@@ -153,7 +153,7 @@
 
   <div class="row">
     <div class="col-sm-8 col-sm-offset-4 col-md-9 col-md-offset-3 main" id="main">
-      <form class="search small" name="searchform" action="#" method="get" accept-charset="UTF-8" style="position:fixed;top:6px;z-index:1052;max-width:500px;">
+      <form class="search small" id="newform" name="searchform" action="#" method="get" accept-charset="UTF-8">
         <div class="input-group">
           <input name="query" id="query" type="text" class="form-control searchinput typeahead" size="40" maxlength="200" placeholder="Document Retrieval" value="" autofocus="autofocus" onFocus="this.select()" onclick="document.getElementById('Enter').innerHTML = 'search'">
           <div class="input-group-btn">
@@ -247,7 +247,8 @@
     </div> <!-- close sidebar -->
   </div> <!-- close row -->
 </div> <!-- close content container -->
-
+<script>$('#newbtn').on('click',function(){document.getElementById('newform').submit();});
+</script>
 <!-- modify content according to query url attributes -->
 <script type="text/javascript">
   var rowCollection;
